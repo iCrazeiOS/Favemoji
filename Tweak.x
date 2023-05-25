@@ -7,6 +7,7 @@
 
 static NSMutableDictionary *prefs;
 BOOL enabled = YES;
+int customAmount = 30;
 NSString *emojis = @"";
 
 
@@ -73,6 +74,14 @@ NSString *emojis = @"";
 %end
 
 
+// Change amount of recent emojis (also includes favourites)
+%hook UIKeyboardEmojiGraphicsTraits
+-(int)prepolulatedRecentCount {
+	return customAmount;
+}
+%end
+
+
 static void loadPrefs() {
 	NSString *path = @"/var/mobile/Library/Preferences/com.icraze.favemoji.plist";
 	if ([[NSFileManager defaultManager] fileExistsAtPath:@"/var/jb/var/mobile/Library/Preferences/"]) {
@@ -81,6 +90,7 @@ static void loadPrefs() {
 	prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
 
 	enabled = prefs[@"enabled"] ? [prefs[@"enabled"] boolValue] : YES;
+	customAmount = prefs[@"customAmount"] ? [prefs[@"customAmount"] intValue] : 30;
 	emojis = (prefs[@"emojis"] == nil) ? @"" : prefs[@"emojis"];
 
 	// Remove spaces in case the user added them
