@@ -1,8 +1,8 @@
 Package: com.icraze.favemoji
 Name: Favemoji
-Version: 1.0
+Version: 1.1
 Architecture: iphoneos-arm
-Description: Replaces "Frequently Used" emojis with custom favourites
+Description: Replaces "Frequently Used" emojis with custom favourites. Also allows you to change the amount of recent emojis.
 Maintainer: iCraze
 Author: iCraze
 Section: Tweaks
